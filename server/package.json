@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for unmasked",
+  "homepage": "https://github.com/imankurbhowmik/unmasked#readme",
+  "bugs": {
+    "url": "https://github.com/imankurbhowmik/unmasked/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imankurbhowmik/unmasked.git"
+  },
+  "license": "ISC",
+  "author": "ankur",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
+    "start": "node --experimental-json-modules src/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
