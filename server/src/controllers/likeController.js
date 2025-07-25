@@ -38,3 +38,24 @@ export const getLikeCount = async (req, res) => {
   const count = await Like.countDocuments({ postId });
   res.json({ count });
 };
+
+export const isPostLikedByUser = async (req, res) => {
+  const { postId } = req.params;
+
+  try {
+    // Check for both anonymous and named likes
+    const like = await Like.findOne({
+      postId,
+      $or: [
+        { authorId: req.user._id, isAnonymous: false },
+        { authorId: null, isAnonymous: true },
+      ],
+    });
+
+    const isLiked = !!like;
+    res.json({ isLiked });
+  } catch (err) {
+    console.error("Error checking like status:", err);
+    res.status(500).json({ msg: "Failed to check like status" });
+  }
+};

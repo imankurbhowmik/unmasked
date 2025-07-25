@@ -75,3 +75,19 @@ export const getMyPosts = async (req, res) => {
     res.status(500).json({ msg: "Failed to fetch your posts" });
   }
 };
+
+export const getPostById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+
+    res.json(post);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Failed to fetch post" });
+  }
+};

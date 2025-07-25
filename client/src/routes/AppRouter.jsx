@@ -16,10 +16,10 @@ const AppRouter = () => {
       
       <Route element={<ProtectedRoute />}>
         <Route path="/feed" element={<MainFeed />} />
-        <Route path="/post/:postId" element={<SinglePost />} />
+        <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/my-posts" element={<MyPostsPage />} />
+        <Route path="/my-posts" element={<MyPosts />} />
       </Route>
     </Routes>
   );
