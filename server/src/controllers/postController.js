@@ -61,3 +61,17 @@ export const deletePost = async (req, res) => {
   res.json({ msg: "Post deleted successfully" });
 };
 
+export const getMyPosts = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const posts = await Post.find({
+      authorId: userId,
+      isAnonymous: false, // Only named posts are linked to a user
+    }).sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to fetch your posts" });
+  }
+};
