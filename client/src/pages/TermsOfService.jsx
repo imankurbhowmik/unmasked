@@ -17,7 +17,7 @@ export const TermsOfService = () => {
 
       <h2 className="text-xl font-semibold">2. Intellectual Property</h2>
       <p>
-        All content and branding of Aarthik are protected under intellectual property laws. Unauthorized use is prohibited.
+        All content and branding of Unmasked are protected under intellectual property laws. Unauthorized use is prohibited.
       </p>
 
       <h2 className="text-xl font-semibold">3. Termination</h2>
