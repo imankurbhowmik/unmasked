@@ -55,7 +55,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen w-full bg-gray-900 text-white">
       <Header />
       <main className="max-w-md mx-auto p-6 mt-8 bg-gray-800 rounded-2xl shadow-md">
         <h2 className="text-xl font-bold mb-4">Change Password</h2>
