@@ -91,3 +91,13 @@ export const getPostById = async (req, res) => {
     res.status(500).json({ msg: "Failed to fetch post" });
   }
 };
+
+export const getMyPostCount = async (req, res) => {
+  try {
+    const count = await Post.countDocuments({ authorId: req.user._id });
+    res.status(200).json({ count });
+  } catch (error) {
+    console.error("Error fetching post count", error);
+    res.status(500).json({ msg: "Failed to get post count" });
+  }
+};

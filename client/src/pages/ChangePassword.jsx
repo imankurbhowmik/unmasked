@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import api from "../api/axios";
 import Header from "../components/Header";
+import { current } from "@reduxjs/toolkit";
 
 const ChangePassword = () => {
   const { token } = useSelector((state) => state.auth);
@@ -22,8 +23,8 @@ const ChangePassword = () => {
       return setError("All fields are required.");
     }
 
-    if (newPassword.length < 6) {
-      return setError("New password must be at least 6 characters.");
+    if (currentPassword === newPassword) {
+      return setError("New password cannot be same as current password.");
     }
 
     if (newPassword !== confirmNewPassword) {

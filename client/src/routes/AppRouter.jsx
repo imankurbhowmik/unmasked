@@ -7,12 +7,19 @@ import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
 import MyPosts from "../pages/MyPosts";
 import ProtectedRoute from "../routes/ProtectedRoute";
+import {PrivacyPolicy} from "../pages/Privacy";
+import { AboutUs } from "../pages/AboutUs";
+import { TermsOfService } from "../pages/TermsOfService";
+
 const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/feed" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/about" element={<AboutUs />} />
+      <Route path="/terms" element={<TermsOfService />} />
       
       <Route element={<ProtectedRoute />}>
         <Route path="/feed" element={<MainFeed />} />

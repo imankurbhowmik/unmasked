@@ -6,7 +6,7 @@ import api from "../api/axios";
 
 const PostCard = ({ _id, authorName, content, isAnonymous }) => {
   const navigate = useNavigate();
-  const { token, userData } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
 
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -14,14 +14,17 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
 
   const fetchLikeData = async () => {
     try {
-      const res = await api.get(`/api/likes/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const countRes = await api.get(`/api/likes/${_id}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
-      setLikeCount(res.data.count);
+      setLikeCount(countRes.data.count);
+
+      const statusRes = await api.get(`/api/likes/status/${_id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setIsLiked(statusRes.data.isLiked);
     } catch (err) {
-      console.error("Error fetching like count", err);
+      console.error("Error fetching like data", err);
     }
   };
 
@@ -31,20 +34,10 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
     try {
       await api.post(
         "/api/likes",
-        {
-          postId: _id,
-          isAnonymous,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { postId: _id, isAnonymous },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      // Optimistic update
-      setIsLiked((prev) => !prev);
-      setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
+      await fetchLikeData(); // Re-sync after like/unlike
     } catch (err) {
       console.error("Error toggling like", err);
     } finally {
@@ -70,7 +63,7 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
 
       <div className="flex items-center gap-6 text-sm">
         <button
-          className={`flex items-center gap-1 ${
+          className={`flex items-center gap-1 transition ${
             isLiked ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
           }`}
           onClick={handleLike}
@@ -81,8 +74,7 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
 
         <button
           className="flex items-center gap-1 text-gray-400 hover:text-green-400"
-          onClick={() => 
-            navigate(`/post/${_id}`)}
+          onClick={() => navigate(`/post/${_id}`)}
         >
           <FaRegCommentDots />
           <span>Comment</span>
@@ -93,5 +85,6 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
 };
 
 export default PostCard;
+
 
 

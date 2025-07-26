@@ -9,6 +9,7 @@ const MyPosts = () => {
   const { userData, token, rehydrated } = useSelector((state) => state.auth);
   const [posts, setPosts] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [likedStatus, setLikedStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -28,20 +29,31 @@ const MyPosts = () => {
     }
   };
 
-  const fetchLikeCounts = async () => {
+  const fetchLikeData = async () => {
     try {
       const counts = {};
+      const status = {};
+
       await Promise.all(
         posts.map(async (post) => {
-          const res = await api.get(`/api/likes/${post._id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          counts[post._id] = res.data.count;
+          const [countRes, statusRes] = await Promise.all([
+            api.get(`/api/likes/${post._id}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            api.get(`/api/likes/status/${post._id}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
+
+          counts[post._id] = countRes.data.count;
+          status[post._id] = statusRes.data.isLiked;
         })
       );
+
       setLikeCounts(counts);
+      setLikedStatus(status);
     } catch (err) {
-      console.error("Error fetching like counts", err);
+      console.error("Error fetching like data", err);
     }
   };
 
@@ -50,18 +62,11 @@ const MyPosts = () => {
       await api.post(
         "/api/likes",
         { postId, isAnonymous },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      // Optimistic update
-      setLikeCounts((prev) => ({
-        ...prev,
-        [postId]: (prev[postId] || 0) + 1, // no unlike, just increment
-      }));
+      await fetchLikeData(); // Refetch both count and status
     } catch (err) {
-      console.error("Failed to like post:", err);
+      console.error("Failed to toggle like:", err);
     }
   };
 
@@ -85,7 +90,7 @@ const MyPosts = () => {
 
   useEffect(() => {
     if (posts.length > 0) {
-      fetchLikeCounts();
+      fetchLikeData();
     }
   }, [posts]);
 
@@ -127,7 +132,11 @@ const MyPosts = () => {
 
             <div className="flex items-center gap-6 text-sm">
               <button
-                className="flex items-center gap-1 text-gray-400 hover:text-blue-400"
+                className={`flex items-center gap-1 transition ${
+                  likedStatus[post._id]
+                    ? "text-blue-400"
+                    : "text-gray-400 hover:text-blue-400"
+                }`}
                 onClick={() => handleLike(post._id, post.isAnonymous)}
               >
                 <FaThumbsUp />
@@ -150,5 +159,6 @@ const MyPosts = () => {
 };
 
 export default MyPosts;
+
 
 

@@ -47,6 +47,11 @@ const SinglePost = () => {
     e.preventDefault();
     if (!newComment.trim()) return;
 
+    const wordCount = newComment.length;
+    if (wordCount > 1800) {
+      return setError("Comment cannot exceed 300 words.");
+    }
+
     try {
       setSubmitting(true);
       await api.post(
@@ -64,6 +69,7 @@ const SinglePost = () => {
       );
       setNewComment("");
       setIsAnonymous(false);
+      setError("");
       fetchComments();
     } catch (err) {
       setError(err?.response?.data?.msg || "Failed to comment");
