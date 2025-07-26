@@ -42,7 +42,7 @@ Live at: [🌐 https://unmasked.online](https://unmasked.online)
 
 ### Clone the repo
 
-- git clone **[github](https://github.com/imankurbhowmik/unmasked)**
+- git clone **[github](https://github.com/imankurbhowmik/unmasked.git)**
 
 ### Setup Backend
 
