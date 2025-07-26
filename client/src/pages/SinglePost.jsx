@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaThumbsUp } from "react-icons/fa";
 import api from "../api/axios";
+import Header from "../components/Header";
 
 const SinglePost = () => {
   const { id: postId } = useParams();
@@ -99,6 +100,8 @@ const SinglePost = () => {
     return <div className="text-white p-4 text-center">Loading...</div>;
 
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-gray-900 text-white flex justify-center">
       <div className="w-full max-w-2xl px-4 py-6 space-y-6">
         {/* Post */}
@@ -171,6 +174,7 @@ const SinglePost = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

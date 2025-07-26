@@ -1,5 +1,9 @@
+import Header from "../components/Header";
+
 export const TermsOfService = () => {
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-gray-900 text-white px-4 py-10">
   <div className="max-w-3xl mx-auto space-y-6">
     <h1 className="text-3xl font-bold text-blue-400">Terms of Service</h1>
@@ -27,6 +31,7 @@ export const TermsOfService = () => {
       </p>
   </div>
 </div>
+</>
   );
 };
 

@@ -8,7 +8,8 @@ import {
   FaPhoneAlt,
   FaLock,
   FaShieldAlt,
-  FaRegNewspaper
+  FaRegNewspaper,
+  FaCalendarTimes
 } from "react-icons/fa";
 import {
   AiFillInstagram,
@@ -17,12 +18,32 @@ import {
   AiFillGithub,
 } from "react-icons/ai";
 import api from "../api/axios";
+import Header from "../components/Header";
 
 const Profile = () => {
   const { userData, rehydrated, token } = useSelector((state) => state.auth);
+  const id = userData?._id;
   const navigate = useNavigate();
 
   const [postCount, setPostCount] = useState(null);
+  const [dateJoined, setDateJoined] = useState(null);
+
+  useEffect(() => {
+    const fetchMyJoinedDate = async () => {
+      try {
+        const res = await api.get(`/api/users/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setDateJoined(res.data.createdAt);
+      } catch (err) {
+        console.error("Failed to fetch user info", err);
+      }
+    };
+
+    if (rehydrated && id) {
+      fetchMyJoinedDate();
+    }
+  }, [rehydrated, id, token]);
 
   useEffect(() => {
     const fetchPostCount = async () => {
@@ -46,6 +67,8 @@ const Profile = () => {
   }
 
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-gray-900 text-white py-8 px-4">
       <div className="max-w-3xl mx-auto space-y-8">
         {/* Profile Info Card */}
@@ -66,6 +89,10 @@ const Profile = () => {
                   Total Posts: <span className="text-gray-400 font-semibold">{postCount}</span>
                 </p>
               )}
+              <p className="text-gray-400 flex items-center gap-2 mt-2 text-sm">
+                              <FaCalendarTimes />
+                              Joined: <span className="text-gray-400 font-semibold">{new Date(dateJoined).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+                            </p>
             </div>
 
             <button
@@ -144,6 +171,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

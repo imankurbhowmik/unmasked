@@ -8,7 +8,8 @@ import {
   FaPhoneAlt,
   FaLock,
   FaShieldAlt,
-  FaRegNewspaper
+  FaRegNewspaper,
+  FaCalendarTimes
 } from "react-icons/fa";
 import {
   AiFillInstagram,
@@ -18,6 +19,7 @@ import {
 } from "react-icons/ai";
 import api from "../api/axios";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header";
 
 const AnotherUserProfile = () => {
   const { userData, rehydrated, token } = useSelector((state) => state.auth);
@@ -52,6 +54,8 @@ const AnotherUserProfile = () => {
   if (!author) return <div className="text-white p-4">Loading profile...</div>;
 
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-gray-900 text-white py-8 px-4">
       <div className="max-w-3xl mx-auto space-y-8">
         {/* Profile Info Card */}
@@ -72,6 +76,10 @@ const AnotherUserProfile = () => {
                   Total Posts: <span className="text-gray-400 font-semibold">{postCount}</span>
                 </p>
               )}
+              <p className="text-gray-400 flex items-center gap-2 mt-2 text-sm">
+                <FaCalendarTimes />
+                Joined: <span className="text-gray-400 font-semibold">{new Date(author.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+              </p>
             </div>
 
             <button
@@ -150,6 +158,7 @@ const AnotherUserProfile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

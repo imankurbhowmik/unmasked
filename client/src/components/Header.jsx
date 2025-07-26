@@ -8,23 +8,30 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-  dispatch(logout());
-  localStorage.removeItem("auth");
-  navigate("/login");
-};
-
+    dispatch(logout());
+    localStorage.removeItem("auth");
+    navigate("/login");
+  };
 
   return (
     <header className="bg-gray-800 text-white flex items-center justify-between px-6 py-4 shadow-md">
-      {/* Left: Logo / Brand Name */}
-      <h1
-        className="text-xl font-bold cursor-pointer"
+      {/* Left: Logo + Brand + Tagline */}
+      <div
+        className="flex items-center space-x-3 cursor-pointer"
         onClick={() => navigate("/")}
       >
-        Unmasked
-      </h1>
+        <img
+          src="/unmasked.svg"
+          alt="Unmasked Logo"
+          className="h-10 w-10 object-contain"
+        />
+        <div>
+          <h1 className="text-xl font-bold leading-tight pb-2">Unmasked</h1>
+          <p className="text-xs text-gray-400 -mt-1">Speak Freely. Be Unmasked.</p>
+        </div>
+      </div>
 
-      {/* Right: Icons */}
+      {/* Right: Profile, Password, Logout Icons */}
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate("/profile")}
@@ -55,3 +62,4 @@ const Header = () => {
 };
 
 export default Header;
+

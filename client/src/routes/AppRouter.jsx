@@ -18,8 +18,6 @@ const AppRouter = () => {
       <Route path="/" element={<Navigate to="/feed" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/privacy" element={<PrivacyPolicy />} />
-      <Route path="/terms" element={<TermsOfService />} />
       
       <Route element={<ProtectedRoute />}>
         <Route path="/feed" element={<MainFeed />} />
@@ -29,7 +27,8 @@ const AppRouter = () => {
         <Route path="/my-posts" element={<MyPosts />} />
         <Route path="/user/:id" element={<AnotherUserProfile />} />
         <Route path="/user/posts/:id" element={<AnotherUserPosts />} />
-
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Route>
     </Routes>
   );

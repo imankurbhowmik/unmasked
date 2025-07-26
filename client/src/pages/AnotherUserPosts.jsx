@@ -87,7 +87,7 @@ const AnotherUserPosts = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       <Header />
       <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
-        <h2 className="text-2xl font-semibold mb-4">{`Posts by ${posts[0].authorName}`}</h2>
+        <h2 className="text-2xl font-semibold mb-4">{`Posts by ${posts[0]?.authorName || "User"}`}</h2>
 
         {loading && <p className="text-gray-400">Loading posts...</p>}
         {error && <p className="text-red-500">{error}</p>}
