@@ -3,8 +3,9 @@ import { FaThumbsUp, FaRegCommentDots } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import api from "../api/axios";
+import { Link } from "react-router-dom";
 
-const PostCard = ({ _id, authorName, content, isAnonymous }) => {
+const PostCard = ({ _id, authorId, authorName, content, isAnonymous }) => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 
@@ -52,10 +53,18 @@ const PostCard = ({ _id, authorName, content, isAnonymous }) => {
   return (
     <div className="bg-gray-800 text-white p-5 rounded-xl shadow-md mb-4 transition hover:shadow-lg break-words">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-lg font-semibold truncate max-w-[90%]">
-          {authorName === "Anonymous" ? "Anonymous" : authorName}
-        </h3>
-      </div>
+      <h3 className="text-blue-400 text-lg font-semibold truncate max-w-[90%]">
+    {authorName !== "Anonymous" && authorId ? (
+      <Link
+        to={`/user/${authorId}`}
+        className="text-blue-400"
+      >
+        {authorName}
+      </Link>
+    ) : "Anonymous"}
+  </h3>
+</div>
+
 
       <p className="text-gray-300 mb-4 whitespace-pre-wrap break-words">
         {content}

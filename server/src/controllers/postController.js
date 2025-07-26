@@ -101,3 +101,29 @@ export const getMyPostCount = async (req, res) => {
     res.status(500).json({ msg: "Failed to get post count" });
   }
 };
+
+export const getPostsByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find all posts by that userId
+    const posts = await Post.find({ authorId: userId }).sort({ createdAt: -1 });
+
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error("Error fetching posts by user ID:", error);
+    res.status(500).json({ msg: "Failed to get posts for this user" });
+  }
+};
+
+export const getAnotherUserPostCount = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const count = await Post.countDocuments({ authorId: userId });
+    res.status(200).json({ count });
+  } catch (error) {
+    console.error("Error fetching post count", error);
+    res.status(500).json({ msg: "Failed to get post count" });
+  }
+};
+

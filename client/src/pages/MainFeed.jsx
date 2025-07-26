@@ -48,6 +48,7 @@ const MainFeed = () => {
           posts.map((post) => (
             <PostCard
               key={post._id}
+              authorId={post.authorId}
               {...post}
               currentUserId={userData?._id}
               onLike={handleLike}

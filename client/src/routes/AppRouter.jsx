@@ -8,8 +8,9 @@ import ChangePassword from "../pages/ChangePassword";
 import MyPosts from "../pages/MyPosts";
 import ProtectedRoute from "../routes/ProtectedRoute";
 import {PrivacyPolicy} from "../pages/Privacy";
-import { AboutUs } from "../pages/AboutUs";
 import { TermsOfService } from "../pages/TermsOfService";
+import AnotherUserPosts from "../pages/AnotherUserPosts";
+import AnotherUserProfile from "../pages/AnotherUserProfile";
 
 const AppRouter = () => {
   return (
@@ -18,7 +19,6 @@ const AppRouter = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
-      <Route path="/about" element={<AboutUs />} />
       <Route path="/terms" element={<TermsOfService />} />
       
       <Route element={<ProtectedRoute />}>
@@ -27,6 +27,9 @@ const AppRouter = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/my-posts" element={<MyPosts />} />
+        <Route path="/user/:id" element={<AnotherUserProfile />} />
+        <Route path="/user/posts/:id" element={<AnotherUserPosts />} />
+
       </Route>
     </Routes>
   );
