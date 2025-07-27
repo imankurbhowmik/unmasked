@@ -51,7 +51,7 @@ const AnotherUserProfile = () => {
     }
   }, [rehydrated, id, token]);
 
-  if (!author) return <div className="flex justify-center items-center py-6">
+  if (!author) return <div className="min-h-screen bg-gray-900 text-white flex justify-center items-center py-6">
       <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
 
