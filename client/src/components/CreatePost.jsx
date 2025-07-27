@@ -15,8 +15,8 @@ const CreatePost = ({ refreshPosts }) => {
     e.preventDefault();
     setError("");
 
-    const wordCount = content.split(" ").length;
-    if (wordCount > 300) {
+    const wordCount = content.length;
+    if (wordCount > 1800) {
       return setError("Post cannot exceed 300 words.");
     }
 

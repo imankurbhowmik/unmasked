@@ -15,7 +15,6 @@ const Header = () => {
 
   return (
     <header className="bg-gray-800 text-white flex items-center justify-between px-6 py-4 shadow-md">
-      {/* Left: Logo + Brand + Tagline */}
       <div
         className="flex items-center space-x-3 cursor-pointer"
         onClick={() => navigate("/")}
@@ -31,7 +30,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Right: Profile, Password, Logout Icons */}
+      
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate("/profile")}

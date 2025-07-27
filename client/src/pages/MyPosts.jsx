@@ -100,7 +100,9 @@ const MyPosts = () => {
       <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
         <h2 className="text-2xl font-semibold mb-4">My Posts</h2>
 
-        {loading && <p className="text-gray-400">Loading your posts...</p>}
+        {loading && <div className="flex justify-center items-center py-6">
+        <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>}
         {error && <p className="text-red-500">{error}</p>}
         {!loading && posts.length === 0 && (
           <p className="text-gray-400">You haven't posted anything yet.</p>

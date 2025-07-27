@@ -63,7 +63,9 @@ const Profile = () => {
   }, [rehydrated, userData]);
 
   if (!rehydrated || !userData) {
-    return <div className="text-white p-4">Loading profile...</div>;
+    return <div className="flex justify-center items-center py-6">
+      <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>;
   }
 
   return (
@@ -105,7 +107,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Branding & Company Info */}
+      
         <div className="bg-gray-800 rounded-xl p-6 shadow-md text-gray-300 space-y-6">
           <h2 className="text-xl font-semibold text-white">About Unmasked</h2>
           <p className="text-gray-400">
@@ -114,7 +116,7 @@ const Profile = () => {
             Founded in 2025, Unmasked continues to grow as a platform committed to ethical technology, free speech, and mental wellness.
           </p>
 
-          {/* Contact / Support / Policies */}
+        
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div className="space-y-1">
               <h3 className="font-semibold text-white">Contact & Support</h3>
