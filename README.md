@@ -42,19 +42,25 @@ Live at: [🌐 https://unmasked.online](https://unmasked.online)
 
 ### Clone the repo
 
-- git clone **[github](https://github.com/imankurbhowmik/unmasked.git)**
+```bash
+git clone https://github.com/imankurbhowmik/unmasked.git
+```
 
 ### Setup Backend
 
-- cd server
-- npm install
-- npm run dev
+```bash
+cd server
+npm install
+npm run dev
+```
 
 ### Setup Frontend
 
-- cd client
-- npm install
-- npm run dev
+```bash
+cd client
+npm install
+npm run  dev
+```
 
 ---
 
@@ -88,6 +94,3 @@ Live at: [🌐 https://unmasked.online](https://unmasked.online)
 
 **Ankur Bhowmik**
 **[LinkedIn](https://www.linkedin.com/in/ankur-bhowmik-83921b18b)**
-
-
-
